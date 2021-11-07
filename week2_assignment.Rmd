@@ -1,0 +1,37 @@
+---
+title: "Developing Data Products Week 2"
+author: "Sagnik Chakravarty"
+date: "07/11/2021"
+output: html_document
+---
+
+# Hitman Logo locations
+
+For this assignment, I randomly picked 5 locations and decided to mark them with IO interactive's famous hitman game franchise's logo. Each of the icon markers in the map has been embedded with a link to a 
+cool wallpaper of a Hitman game from the franchise.
+
+Why you ask? Because I am a fan!
+
+```{r echo=FALSE}
+
+
+library(leaflet)
+hitmanIcon<- makeIcon(iconUrl = 'F:/Hitman-Blood-Money-9-icon.png', iconHeight = 31, iconWidth = 31*215/230, iconAnchorX = 31*215/230/2, iconAnchorY = 31)
+#arg iconUrl is for the icon's url or file path
+
+hitmanSites<- c("<a href='https://wall.alphacoders.com/big.php?i=1081798'>Hitman 3</a>",
+                "<a href='https://wallpaperaccess.com/hitman-game'>Hitman Contracts</a>",
+                "<a href='https://uhdpixel.com/wall/hitman-2-game-agent-47-silencer-gun-4k-y167/'>Hitman 2</a>",
+                "<a href='https://images2.fanpop.com/images/photos/7600000/hitman-wallpapers-hitman-7638640-1280-1024.jpg'>Hitman Blood Money</a>",
+                "<a href='https://images.wallpapersden.com/image/download/hitman-2020_bGlnaWaUmZqaraWkpJRobWllrWdma2U.jpg'>Hitman 1 (2016)</a>")
+
+set.seed(2)
+hitman_markersdf<- data.frame(lat= runif(n = 5, min = 20, max = 40), lon= runif(n = 5, min = 15, max = 35)) 
+#latitude and longitude coordinates for our marked locations
+
+#plotting the map
+hitman_markersdf %>% leaflet() %>% addTiles() %>% addMarkers(icon = hitmanIcon, popup = hitmanSites) #embedding our hitmanSites in the map using the popup arg
+
+
+```
+
